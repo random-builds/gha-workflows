@@ -54,7 +54,7 @@ jobs:
   variables:
     runs-on: ubuntu-latest
     needs: basic
-    environment: ${{ inputs.environment != null && inputs.environment || 'dev' }}
+    environment: ${{ inputs.environment || 'dev' }}
     env:
       env_one: one
     steps:
