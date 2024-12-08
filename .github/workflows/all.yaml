@@ -22,6 +22,11 @@ on:
         description: optional
         required: false
         type: string
+      environment:
+        description: environment
+        required: false
+        default: dev
+        type: string
 
 defaults:
   run:
@@ -44,6 +49,7 @@ jobs:
   variables:
     runs-on: ubuntu-latest
     needs: basic
+    environment: ${{ inputs.environment != null && inputs.environment || 'dev' }}
     env:
       env_one: one
     steps:
@@ -52,6 +58,11 @@ jobs:
           echo $env_one
           echo $env_two
       - run: |
+          echo ${{ vars.my_config }}
+          echo ${{ secrets.my_secret }}
+          
+          echo ${{ secrets.dev_secret }}
+          
           echo ${{ env.env_one }}
           echo ${{ needs.basic.outputs.out_one }}
           echo ${{ github.repository }}
@@ -62,10 +73,13 @@ jobs:
             echo not workflow call
           fi
 
-  parallel:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo parallel 1
+#  matrix:
+#    runs-on: ubuntu-latest
+#    strategy:
+#      max-parallel: 2
+#      fail-fast: true
+#      matrix:
+
 
   fail-and-proceed:
     runs-on: ubuntu-latest
