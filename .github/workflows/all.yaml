@@ -34,6 +34,7 @@ defaults:
 
 env:
   workflow_env: workflow_env!
+  workflow_env_overwritten: workflow_env_overwritten!
 
 jobs:
   basic:
@@ -68,6 +69,7 @@ jobs:
           echo ${{ secrets.env_dev_config }}
           
           echo ${{ env.workflow_env }}
+          echo ${{ env.workflow_env_overwritten }}
           echo ${{ env.env_one }}
           echo ${{ needs.basic.outputs.out_one }}
           echo ${{ github.repository }}
@@ -77,6 +79,8 @@ jobs:
           else
             echo not workflow call
           fi
+        env:
+          workflow_env_overwritten: overwritten!
 
 #  matrix:
 #    runs-on: ubuntu-latest
