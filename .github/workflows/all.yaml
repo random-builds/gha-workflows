@@ -64,10 +64,12 @@ jobs:
           echo $env_two
       - run: |
           echo ${{ vars.repo_config }}
-          echo ${{ secrets.repo_secret }}
+          echo ${{ vars.env_dev_config }}
+          echo ${{ vars.org_config }}
           
+          echo ${{ secrets.repo_secret }}          
           echo ${{ secrets.env_dev_secret }}
-          echo ${{ secrets.env_dev_config }}
+          echo ${{ secrets.org_secret }}
           
           echo ${{ env.workflow_env }}
           echo ${{ env.workflow_env_overwritten }}
