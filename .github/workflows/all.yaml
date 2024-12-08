@@ -104,6 +104,8 @@ jobs:
       - run: echo still running 2
       - run: echo early exit; exit 1
       - run: echo not gonna run
+      - run: echo still not gonna run
+        if: success()
       - run: echo failed run
         if: failure()
       - run: echo always runs
