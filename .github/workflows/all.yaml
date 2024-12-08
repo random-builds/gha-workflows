@@ -13,6 +13,9 @@ on:
         required: false
         default: dev
         type: string
+        options:
+          - dev
+          - prod
   workflow_call:
     inputs:
       required:
@@ -48,8 +51,11 @@ jobs:
       - run: pwd
       - run: pwd
         working-directory: /bin
+      - run: echo step_output=step-output >> $GITHUB_OUTPUT
+        id: with_output
     outputs:
       out_one: uno
+      out_two: ${{ steps.with_output.outputs.step_output }}
 
   variables:
     runs-on: ubuntu-latest
@@ -74,8 +80,10 @@ jobs:
           echo ${{ env.workflow_env }}
           echo ${{ env.workflow_env_overwritten }}
           echo ${{ env.env_one }}
-          echo ${{ needs.basic.outputs.out_one }}
           echo ${{ github.repository }}
+          
+          echo ${{ needs.basic.outputs.out_one }}
+          echo ${{ needs.basic.outputs.out_two }}
         env:
           workflow_env_overwritten: overwritten!
       - run: |
