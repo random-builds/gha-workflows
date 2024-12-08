@@ -1,6 +1,11 @@
 name: all
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/all.yaml
   workflow_dispatch:
   workflow_call:
     inputs:
