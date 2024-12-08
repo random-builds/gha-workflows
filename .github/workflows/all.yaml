@@ -29,13 +29,25 @@ jobs:
     steps:
       - run: echo basic one
       - run: echo basic two
-  fail-and-proceed:
+  parallel:
     runs-on: ubuntu-latest
     steps:
-      - run: echo fail exit 1
+      - run: echo parallel 1
+  fail-and-proceed:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - run: echo fail; exit 1
         continue-on-error: true
       - run: echo still running
       - run: echo sleeping; sleep 65s
         timeout-minutes: 1
         continue-on-error: true
       - run: echo still running 2
+      - run: echo early exit; exit 1
+      - run: echo not gonna run
+
+  end:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo end
