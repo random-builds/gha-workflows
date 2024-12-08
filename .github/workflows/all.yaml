@@ -58,10 +58,11 @@ jobs:
           echo $env_one
           echo $env_two
       - run: |
-          echo ${{ vars.my_config }}
-          echo ${{ secrets.my_secret }}
+          echo ${{ vars.repo_config }}
+          echo ${{ secrets.repo_secret }}
           
-          echo ${{ secrets.dev_secret }}
+          echo ${{ secrets.env_dev_secret }}
+          echo ${{ secrets.env_dev_confiv }}
           
           echo ${{ env.env_one }}
           echo ${{ needs.basic.outputs.out_one }}
