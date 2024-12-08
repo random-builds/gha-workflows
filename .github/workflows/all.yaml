@@ -78,7 +78,7 @@ jobs:
           workflow_env_overwritten: overwritten!
       - run: |
             echo workflow call
-        if: inputs.dispatch_env != ''
+        if: inputs.dispatch_env
 
 
   #  matrix:
