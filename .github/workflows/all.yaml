@@ -77,7 +77,7 @@ jobs:
         env:
           workflow_env_overwritten: overwritten!
       - run: |
-            echo workflow call
+            echo workflow dispatch
         if: inputs.dispatch_env
 
 
