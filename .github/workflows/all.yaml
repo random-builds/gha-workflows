@@ -32,4 +32,5 @@ jobs:
       - run: echo still running
       - run: echo sleeping; sleep 65s
         timeout-minutes: 1
+        continue-on-error: true
       - run: echo still running 2
