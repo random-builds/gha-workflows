@@ -73,16 +73,14 @@ jobs:
           echo ${{ env.env_one }}
           echo ${{ needs.basic.outputs.out_one }}
           echo ${{ github.repository }}
-          
-          if [[ "${{ inputs.required }}" != "" ]]; then
-            echo workflow call
-          else
-            echo not workflow call
-          fi
         env:
           workflow_env_overwritten: overwritten!
+      - run: |
+            echo workflow call
+        if: inputs.required != ''
 
-#  matrix:
+
+  #  matrix:
 #    runs-on: ubuntu-latest
 #    strategy:
 #      max-parallel: 2
