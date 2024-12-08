@@ -7,6 +7,12 @@ on:
     paths:
       - .github/workflows/all.yaml
   workflow_dispatch:
+    inputs:
+      environment:
+        description: environment
+        required: false
+        default: dev
+        type: string
   workflow_call:
     inputs:
       required:
@@ -21,11 +27,6 @@ on:
       optional:
         description: optional
         required: false
-        type: string
-      environment:
-        description: environment
-        required: false
-        default: dev
         type: string
 
 defaults:
