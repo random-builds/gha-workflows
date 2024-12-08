@@ -32,6 +32,9 @@ defaults:
   run:
     shell: bash
 
+env:
+  workflow_env: workflow_env!
+
 jobs:
   basic:
     runs-on: ubuntu-latest
@@ -64,6 +67,7 @@ jobs:
           echo ${{ secrets.env_dev_secret }}
           echo ${{ secrets.env_dev_config }}
           
+          echo ${{ env.workflow_env }}
           echo ${{ env.env_one }}
           echo ${{ needs.basic.outputs.out_one }}
           echo ${{ github.repository }}
