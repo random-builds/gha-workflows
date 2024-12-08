@@ -23,16 +23,27 @@ on:
         required: false
         type: string
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   basic:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: /tmp
+        shell: sh
     steps:
-      - run: echo basic one
-      - run: echo basic two
+      - run: pwd
+      - run: pwd
+        working-directory: /bin
+
   parallel:
     runs-on: ubuntu-latest
     steps:
       - run: echo parallel 1
+
   fail-and-proceed:
     runs-on: ubuntu-latest
     continue-on-error: true
