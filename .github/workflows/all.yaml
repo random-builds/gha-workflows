@@ -1,0 +1,35 @@
+name: all
+
+on:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      required:
+        description: one
+        required: true
+        type: string
+      default:
+        description: default
+        required: true
+        default: default
+        type: string
+      optional:
+        description: optional
+        required: false
+        type: string
+
+jobs:
+  basic:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo basic one
+      - run: echo basic two
+  fail-and-proceed:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo fail exit 1
+        continue-on-error: true
+      - run: echo still running
+      - run: echo sleeping; sleep 65s
+        timeout-minutes: 1
+      - run: echo still running 2
