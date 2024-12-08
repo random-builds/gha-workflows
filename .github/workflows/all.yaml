@@ -8,7 +8,7 @@ on:
       - .github/workflows/all.yaml
   workflow_dispatch:
     inputs:
-      environment:
+      dispatch_env:
         description: environment
         required: false
         default: dev
@@ -78,7 +78,7 @@ jobs:
           workflow_env_overwritten: overwritten!
       - run: |
             echo workflow call
-        if: inputs.required != ''
+        if: inputs.dispatch_env != ''
 
 
   #  matrix:
