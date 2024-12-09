@@ -40,6 +40,9 @@ env:
   workflow_env: workflow_env!
   workflow_env_overwritten: workflow_env_overwritten!
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
 jobs:
   basic:
     runs-on: ubuntu-latest
