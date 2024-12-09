@@ -141,6 +141,9 @@ jobs:
           - letter: a
             number: 3
             unique: =
+        exclude:
+          - letter: b
+            number: 2
     steps:
       - name: ${{ matrix.letter }} - ${{ matrix.number }} - ${{ matrix.unique || '!' }}
         run: date
