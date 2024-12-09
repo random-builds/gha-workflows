@@ -72,6 +72,28 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
       - run: cat dependencies/dependency_one
 
+  upload-artifact:
+    runs-on: ubuntu-latest
+    needs: cache
+    steps:
+      - run: date > my-artifact
+      - uses: actions/upload-artifact@v4
+        with:
+          name: my_artifact
+          path: my-artifact
+          retention-days: 1
+          compression-level: '9'
+
+  download-artifact:
+    runs-on: ubuntu-latest
+    needs: upload-artifact
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: my_artifact
+          path: my-artifact
+      - run: ls -l my-artifact && cat my-artifact
+
   variables:
     runs-on: ubuntu-latest
     needs: basic
@@ -138,6 +160,6 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - fail-and-proceed
-      - cache
+      - download-artifact
     steps:
       - run: echo end
