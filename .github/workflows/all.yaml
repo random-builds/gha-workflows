@@ -133,7 +133,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/custom_one
-      - run: ls -l
+      - run: pwd
 
   matrix:
     runs-on: ubuntu-latest
