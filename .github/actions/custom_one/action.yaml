@@ -7,6 +7,11 @@ inputs:
     required: false
     default: one 1
 
+outputs:
+  output_one:
+    description: some output
+    value: ${{ steps.out.outputs.my_output }}
+
 runs:
   using: composite
   steps:
@@ -14,4 +19,7 @@ runs:
       run: echo one
       shell: bash
     - run: pwd
+      shell: bash
+    - run: echo my_output=dope! >> $GITHUB_OUTPUT
+      id: out
       shell: bash

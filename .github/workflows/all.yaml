@@ -133,7 +133,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/custom_one
+        id: custom
       - run: pwd
+      - run: echo ${{ steps.custom.outputs.output_one }}
 
   matrix:
     runs-on: ubuntu-latest
