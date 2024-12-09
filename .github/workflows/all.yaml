@@ -57,6 +57,21 @@ jobs:
       out_one: uno
       out_two: ${{ steps.with_output.outputs.step_output }}
 
+  cache:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo some-dependencies > dependency-file.txt
+      - uses: actions/cache
+        id: cache
+        with:
+          path: dependencies
+          key: ${{ hashFiles('**/dependency-file.txt') }}
+      - run: |
+          mkdir -p dependencies
+          date > dependencies/dependency_one
+        if: steps.cache.outputs.cache-hit != 'true'
+      - run: cat dependencies/dependency_one
+
   variables:
     runs-on: ubuntu-latest
     needs: basic
@@ -121,6 +136,8 @@ jobs:
 
   end:
     runs-on: ubuntu-latest
-    needs: fail-and-proceed
+    needs:
+      - fail-and-proceed
+      - cache
     steps:
       - run: echo end
