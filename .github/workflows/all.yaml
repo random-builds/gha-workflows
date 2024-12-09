@@ -131,6 +131,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: variables
     steps:
+      - uses: actions/checkout@v4
       - uses: ./gh-workflows/.github/actions/custom_one
       - run: ls -l
 
