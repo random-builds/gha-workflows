@@ -1,0 +1,17 @@
+name: custom one
+description: description
+
+inputs:
+  input_one:
+    description: input one
+    required: false
+    default: one 1
+
+runs:
+  using: composite
+  steps:
+    - name: one
+      run: echo one
+      shell: bash
+    - run: pwd
+      shell: bash

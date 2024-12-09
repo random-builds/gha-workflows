@@ -127,6 +127,12 @@ jobs:
             echo workflow dispatch
         if: inputs.dispatch_env
 
+  custom-action:
+    runs-on: ubuntu-latest
+    needs: variables
+    steps:
+      - uses: ./gh-workflows/.github/actions/custom_one
+      - run: ls -l
 
   matrix:
     runs-on: ubuntu-latest
@@ -174,5 +180,6 @@ jobs:
       - fail-and-proceed
       - download-artifact
       - matrix
+      - custom-action
     steps:
       - run: echo end
