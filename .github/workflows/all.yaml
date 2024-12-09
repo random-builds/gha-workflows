@@ -132,7 +132,7 @@ jobs:
     needs: variables
     steps:
       - uses: actions/checkout@v4
-      - uses: ./gh-workflows/.github/actions/custom_one
+      - uses: ./.github/actions/custom_one
       - run: ls -l
 
   matrix:
