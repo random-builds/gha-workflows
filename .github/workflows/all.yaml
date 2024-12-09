@@ -128,13 +128,22 @@ jobs:
         if: inputs.dispatch_env
 
 
-  #  matrix:
-#    runs-on: ubuntu-latest
-#    strategy:
-#      max-parallel: 2
-#      fail-fast: true
-#      matrix:
-
+  matrix:
+    runs-on: ubuntu-latest
+    needs: basic
+    strategy:
+      max-parallel: 3
+      fail-fast: true
+      matrix:
+        letter: [a,b,c]
+        number: [1,2,3]
+        include:
+          - letter: a
+            number: 3
+            unique: =
+    steps:
+      - name: ${{ matrix.letter }} - ${{ matrix.number }} - ${{ matrix.unique || '!' }}
+        run: date
 
   fail-and-proceed:
     runs-on: ubuntu-latest
@@ -161,5 +170,6 @@ jobs:
     needs:
       - fail-and-proceed
       - download-artifact
+      - matrix
     steps:
       - run: echo end
